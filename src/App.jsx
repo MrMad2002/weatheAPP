@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
-import Clock from './clock'
 import camera from './assets/cameraLens.png'
 import search from './assets/search.png'
 import cloud from './assets/cloud.png'
@@ -52,7 +51,7 @@ function App() {
         wind: data.wind.speed,
         city: data.name,
         icon: data.weather[0].icon,
-        
+        feelLike: data.main.feels_like
 
       })
       } catch(error) {
@@ -67,7 +66,7 @@ function App() {
   return (
     <>
 
-        <div className='rounded-3xl bg-pink-300 p-0.5 justify-self-center' 
+        <div className='rounded-3xl bg-pink-300 p-0.5 justify-self-center cursor-default' 
             style={{height:'560px', width:'292px', borderRadius:'38px', boxShadow: '10px 10px 20px rgba(0, 0, 0, 0.3), -10px -10px 20px rgba(255, 255, 255, 0.3)'}}>
         
           <div className='justify-center flex flex-wrap px-3'
@@ -86,22 +85,23 @@ function App() {
                   <input
                   type="text"
                   placeholder="Search"
-                  className=" h-full w-10/12 bg-slate-2200 text-black placeholder-gray-500 rounded-l-2xl px-2 focus:outline-none"
+                  className=" h-full w-10/12 text-xl font-medium uppercase bg-slate-2200 text-gray-700 placeholder-gray-500 rounded-l-2xl px-2 focus:outline-none"
                   onChange={(e) => setCityName(e.target.value)} 
                   onKeyDown={(e) => {if(e.key ==='Enter'){fetchWeatherData()}}}/>
-                  <button className='bg-slate-100 active:bg-slate-200 h-full rounded-r-2xl w-2/12'><img
+                  <button className='bg-slate-300 active:bg-slate-200 h-full rounded-r-2xl w-2/12'><img
                   src={search} 
                   alt="Search Icon"
-                  className="h-6 ml-2 mr-1 cursor-pointer"
+                  className="h-6 ml-2 mr-1 cursor-pointer  active:scale-90"
                   onClick={() => fetchWeatherData()} /> </button>
               </div>
         
-              <div className='text-3xl text-white '>
+              <div className=' text-white '>
                   <img src={allIcons[weatherData.icon] || clear} alt=''
-                  className='h-36 w-36'/>
-                  <div className='-mt-2'>
-                      <p> {weatherData.temperature}°C </p>
-                      <p> {weatherData.city || '_____' } </p>
+                  className='h-36 w-36 hover:scale-105'/>
+                  <div className='-mt-2 cursor-default'>
+                      <p className='font-semibold text-[33px]'> {weatherData.temperature}°C </p>
+                      <p className='text-sm -mt-1 hover:scale-110 text-slate-300'>Feels Like: {weatherData.feelLike}</p>
+                      <p className='uppercase font-bold text-4xl'> {weatherData.city || '_____' } </p>
                   </div>
               </div>
 
