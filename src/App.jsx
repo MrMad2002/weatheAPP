@@ -15,7 +15,9 @@ import clear from './assets/clear.png'
 function App() {
   const [cityName, setCityName] = useState('Delhi')
   const [weatherData, setWeatherData] = useState(false)
-  const apiKey = 'e7c4f3ad39dd3e35abd3c12129caa88c';
+
+  //enter Your API KEY for Access API
+  const apiKey = ' ';
   const allIcons = {
     '01d':snow,
     '01n':snow,
